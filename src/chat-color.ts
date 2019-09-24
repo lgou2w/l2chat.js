@@ -9,11 +9,10 @@ const defineColor = (
   code: string,
   isFormat: boolean = false
 ): Color => {
-  return {name, code, isFormat};
+  return { name, code, isFormat };
 };
 
 export const ChatColor = {
-
   BLACK           : defineColor('black',         '0'),
   DARK_BLUE       : defineColor('dark_blue',     '1'),
   DARK_GREEN      : defineColor('dark_green',    '2'),
@@ -38,6 +37,13 @@ export const ChatColor = {
   ITALIC          : defineColor('italic',        'o', true),
 
   RESET           : defineColor('reset',         'r'),
+
+  fromCode        : (code: string): Color | undefined => {
+    if (code && code.length === 1)
+      for (let entry in ChatColor)
+        if (ChatColor[entry].code === code)
+          return ChatColor[entry];
+  },
 };
 
 // Color character
@@ -54,11 +60,11 @@ export const toColor = (
   altColorChar: string = '&'
 ): string => {
   let chars = input.split('');
-  let length = input.length;
+  let length = chars.length;
   for (let i = 0; i < length; i++) {
     if (chars[i] === altColorChar && CHAR_CODES.indexOf(chars[i + 1]) > -1) {
-      chars[i] = (CHAR_COLOR);
-      chars[i + 1] = input[i + 1].toLowerCase();
+      chars[i] = CHAR_COLOR;
+      chars[i + 1] = chars[i + 1].toLowerCase();
     }
   }
   return chars.join('');

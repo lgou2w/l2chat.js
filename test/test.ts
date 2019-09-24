@@ -3,6 +3,6 @@ import { ChatColor, stripColor, toColor } from '../src/chat-color';
 
 describe('test', function () {
   it('should color', async () => {
-    console.log(ChatColor);
+    expect(ChatColor.fromCode('a')).to.equal(ChatColor.GREEN);
   });
 });
