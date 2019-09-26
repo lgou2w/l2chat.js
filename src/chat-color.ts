@@ -1,7 +1,8 @@
 export interface Color {
   readonly name: string,
   readonly code: string,
-  readonly isFormat: boolean
+  readonly isFormat: boolean,
+  toString: () => string;
 }
 
 const defineColor = (
@@ -9,7 +10,12 @@ const defineColor = (
   code: string,
   isFormat: boolean = false
 ): Color => {
-  return { name, code, isFormat };
+  return {
+    name,
+    code,
+    isFormat,
+    toString: (): string => { return CHAR_COLOR + code }
+  };
 };
 
 export const ChatColor = {

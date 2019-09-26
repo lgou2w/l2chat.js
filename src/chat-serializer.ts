@@ -200,7 +200,37 @@ export function toJson(component: ChatComponent): string {
 }
 
 export function fromJson(json: string | [] | { [key: string]: any }): ChatComponent {
-  if (typeof json === 'string')
-    return componentDeserializer(JSON.parse(json));
-  return componentDeserializer(json);
+  return componentDeserializer(
+    typeof json === 'string'
+      ? JSON.parse(json)
+      : json
+  );
+}
+
+const toRaw0 = (result: Array<string>, component: ChatComponent, color: boolean) => {
+  if (color) {
+    let style = component.style;
+    if (style.color)
+      result.push(style.color.toString());
+    if (style.bold === true)
+      result.push(ChatColor.BOLD.toString());
+    if (style.italic === true)
+      result.push(ChatColor.ITALIC.toString());
+    if (style.underlined === true)
+      result.push(ChatColor.UNDERLINE.toString());
+    if (style.strikethrough === true)
+      result.push(ChatColor.STRIKETHROUGH.toString());
+    if (style.obfuscated === true)
+      result.push(ChatColor.OBFUSCATED.toString());
+  }
+  if (component instanceof ChatComponentText)
+    result.push(component.text);
+  for (let ext of component.extras)
+    toRaw0(result, ext, color);
+};
+
+export function toRaw(component: ChatComponent, color: boolean = true): string {
+  let result = new Array<string>();
+  toRaw0(result, component, color);
+  return result.join('');
 }
