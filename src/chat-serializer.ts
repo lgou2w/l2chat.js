@@ -234,3 +234,70 @@ export function toRaw(component: ChatComponent, color: boolean = true): string {
   toRaw0(result, component, color);
   return result.join('');
 }
+
+class RawMessage {
+
+  private readonly raw: string;
+  private readonly regex = /(§[0-9A-FK-OR])/ig;
+  private currentComponent?: ChatComponent;
+  private style: ChatStyle = new ChatStyle();
+  private currentIndex = 0;
+
+  constructor(raw: string) {
+    this.raw = raw;
+  }
+
+  private append = (index: number) => {
+    if (index > this.currentIndex) {
+      let text = this.raw.substring(this.currentIndex, index);
+      let extra = new ChatComponentText(text);
+      extra.setStyle(this.style);
+      this.currentIndex = index;
+      this.style = this.style.clone();
+      if (!this.currentComponent)
+        this.currentComponent = new ChatComponentText();
+      this.currentComponent.append(extra);
+    }
+  };
+
+  get = (): ChatComponent => {
+    let array;
+    while ((array = this.regex.exec(this.raw)) !== null) {
+      this.append(array.index);
+      let match: string = array[0];
+      let color = ChatColor.fromCode(match[1].toLowerCase());
+      switch (color) {
+        case ChatColor.RESET:
+          this.style = new ChatStyle();
+          break;
+        case ChatColor.BOLD:
+          this.style.setBold(true);
+          break;
+        case ChatColor.ITALIC:
+          this.style.setItalic(true);
+          break;
+        case ChatColor.UNDERLINE:
+          this.style.setUnderlined(true);
+          break;
+        case ChatColor.STRIKETHROUGH:
+          this.style.setStrikethrough(true);
+          break;
+        case ChatColor.OBFUSCATED:
+          this.style.setObfuscated(true);
+          break;
+        default:
+          this.style = new ChatStyle().setColor(color);
+          break;
+      }
+      this.currentIndex = this.regex.lastIndex;
+    }
+    if (this.currentIndex < this.raw.length)
+      this.append(this.raw.length);
+
+    return this.currentComponent || new ChatComponentText();
+  }
+}
+
+export function fromRaw(raw: string): ChatComponent {
+  return new RawMessage(raw).get();
+}

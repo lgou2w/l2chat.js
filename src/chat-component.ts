@@ -4,6 +4,8 @@ export interface ChatComponent {
 
   style: ChatStyle;
 
+  setStyle: (style?: ChatStyle) => void;
+
   extras: ChatComponent[];
 
   extraSize: number;
@@ -27,9 +29,13 @@ export abstract class ChatComponentAbstract implements ChatComponent {
   }
 
   set style(style: ChatStyle) {
+    this.setStyle(style);
+  }
+
+  setStyle = (style?: ChatStyle) => {
     this._style = style;
     this._extras.forEach(value => value.style.setParent(this._style));
-  }
+  };
 
   get extras(): ChatComponent[] {
     return this._extras;

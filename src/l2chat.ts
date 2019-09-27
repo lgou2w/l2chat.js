@@ -23,5 +23,6 @@ export {
 export {
   toJson,
   fromJson,
-  toRaw
+  toRaw,
+  fromRaw
 } from './chat-serializer'
