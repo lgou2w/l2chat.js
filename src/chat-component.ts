@@ -1,4 +1,5 @@
-import { ChatStyle } from './chat-style'
+import { ChatStyle } from './chat-style';
+import { toJson, toRaw } from './chat-serializer';
 
 export interface ChatComponent {
 
@@ -13,6 +14,10 @@ export interface ChatComponent {
   append: (extra: ChatComponent) => void;
 
   toString: () => string;
+
+  toJson: () => string;
+
+  toRaw: (color: boolean) => string;
 }
 
 export abstract class ChatComponentAbstract implements ChatComponent {
@@ -56,7 +61,10 @@ export abstract class ChatComponentAbstract implements ChatComponent {
     }, extras=[${
       this.extras.map(extra => extra.toString())
     }]}`
-  }
+  };
+
+  toJson = (): string => { return toJson(this) };
+  toRaw = (color: boolean = true): string => { return toRaw(this, color) };
 }
 
 export class ChatComponentText extends ChatComponentAbstract {
@@ -164,6 +172,27 @@ export class ChatComponentTranslation extends ChatComponentAbstract {
     }', withs=[${
       this.withs.join(',')
     }], style=${
+      this.style.toString()
+    }, extras=[${
+      this.extras.map(extra => extra.toString())
+    }]}`
+  };
+}
+
+// Internal Only
+export class ChatComponentRaw extends ChatComponentAbstract {
+
+  raw: string;
+
+  constructor(raw: string) {
+    super();
+    this.raw = raw;
+  }
+
+  toString = (): string => {
+    return `ChatComponentRaw{raw='${
+      this.raw
+    }', style=${
       this.style.toString()
     }, extras=[${
       this.extras.map(extra => extra.toString())

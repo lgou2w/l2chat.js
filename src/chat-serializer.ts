@@ -1,4 +1,4 @@
-import { ChatColor } from './chat-color';
+import {ChatColor, toColor} from './chat-color';
 import { ChatAction, ChatClickEvent, ChatHoverEvent } from './chat-event';
 import { ChatStyle } from './chat-style';
 import {
@@ -8,7 +8,8 @@ import {
   ChatComponentSelector,
   ChatComponentScore,
   ChatComponentKeybind,
-  ChatComponentTranslation
+  ChatComponentTranslation,
+  ChatComponentRaw // internal only
 } from './chat-component';
 
 const styleSerializer = (key: string, value: any): any => {
@@ -41,7 +42,9 @@ const styleSerializer = (key: string, value: any): any => {
   if (value.hoverEvent) {
     json.hoverEvent = {
       action: value.hoverEvent.action,
-      value: componentSerializer('value', value.hoverEvent.value)
+      value: value.hoverEvent.value instanceof ChatComponentRaw
+        ? value.hoverEvent.value.raw
+        : componentSerializer('value', value.hoverEvent.value)
     }
   }
   return json;
@@ -299,5 +302,6 @@ class RawMessage {
 }
 
 export function fromRaw(raw: string): ChatComponent {
-  return new RawMessage(raw).get();
+  let rawColor = toColor(raw);
+  return new RawMessage(rawColor).get();
 }

@@ -26,3 +26,8 @@ export {
   toRaw,
   fromRaw
 } from './chat-serializer'
+
+export {
+  ChatComponentFancy,
+  chatFancy
+} from './chat-fancy'
