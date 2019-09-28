@@ -202,6 +202,10 @@ export function toJson(component: ChatComponent): string {
   return JSON.stringify(component, componentSerializer)
 }
 
+export function toJsonObject(component: ChatComponent): { [key: string]: any } {
+  return componentSerializer('', component);
+}
+
 export function fromJson(json: string | [] | { [key: string]: any }): ChatComponent {
   return componentDeserializer(
     typeof json === 'string'

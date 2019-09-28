@@ -22,6 +22,7 @@ export {
 
 export {
   toJson,
+  toJsonObject,
   fromJson,
   toRaw,
   fromRaw

@@ -2253,11 +2253,6 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.npm.taobao.org/kind-of/download/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha1-ARRrNqYhjmTljzqNZt5df8b20FE=
 
-l2nbt@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.npm.taobao.org/l2nbt/download/l2nbt-0.0.5.tgz#3119530e5cfccbaf858557e626026e34aeb5b9a1"
-  integrity sha1-MRlTDlz8y6+FhVfmJgJuNK61uaE=
-
 lcid@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/lcid/download/lcid-2.0.0.tgz#6ef5d2df60e52f82eb228a4c373e8d1f397253cf"
