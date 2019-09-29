@@ -1,4 +1,4 @@
-import {ChatColor, toColor} from './chat-color';
+import { ChatColor, toColor } from './chat-color';
 import { ChatAction, ChatClickEvent, ChatHoverEvent } from './chat-event';
 import { ChatStyle } from './chat-style';
 import {
@@ -53,7 +53,7 @@ const styleSerializer = (key: string, value: any): any => {
 const styleDeserializer = (json: { [key: string]: any }): ChatStyle => {
   let style = new ChatStyle();
   if (typeof json.color === 'string')
-    style.color = ChatColor[json.color.toUpperCase()] || ChatColor.WHITE;
+    style.color = ChatColor[json.color.toUpperCase()];
   if (typeof json.bold === 'boolean')
     style.bold = json.bold;
   if (typeof json.italic === 'boolean')

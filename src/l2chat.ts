@@ -2,13 +2,13 @@ export {
   ChatColor,
   stripColor,
   toColor
-} from './chat-color'
+} from './chat-color';
 
 export {
   ChatAction,
   ChatClickEvent,
   ChatHoverEvent
-} from './chat-event'
+} from './chat-event';
 
 export {
   ChatComponent,
@@ -18,7 +18,7 @@ export {
   ChatComponentScore,
   ChatComponentKeybind,
   ChatComponentTranslation
-} from './chat-component'
+} from './chat-component';
 
 export {
   toJson,
@@ -26,9 +26,9 @@ export {
   fromJson,
   toRaw,
   fromRaw
-} from './chat-serializer'
+} from './chat-serializer';
 
 export {
   ChatComponentFancy,
   chatFancy
-} from './chat-fancy'
+} from './chat-fancy';

@@ -24,10 +24,11 @@ export class ChatComponentFancy {
   get size(): number { return this.extras.length }
 
   then = (extra: string | ChatComponent): ChatComponentFancy => {
-    if (typeof extra === 'string')
-      this.extras.push(new ChatComponentText(extra));
-    else
-      this.extras.push(extra);
+    this.extras.push(
+      typeof extra === 'string'
+        ? new ChatComponentText(extra)
+        : extra
+    );
     return this;
   };
 
