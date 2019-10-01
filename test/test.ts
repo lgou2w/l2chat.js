@@ -17,7 +17,6 @@ import {
   fromRaw
 } from '../src/chat-serializer';
 import {
-  ChatComponentFancy,
   chatFancy
 } from '../src/chat-fancy';
 
@@ -65,5 +64,64 @@ describe('test chat component', function () {
   });
   it('should keybind', async () => {
     expect(new ChatComponentKeybind('ctrl')).to.have.property('keybind', 'ctrl');
+  });
+});
+
+describe('test chat json', function () {
+  it('should toJsonObject', async () => {
+    let component = new ChatComponentText('msg');
+    component.style = new ChatStyle().setColor(ChatColor.RED);
+    let json = toJsonObject(component);
+    expect(json.text).to.equal('msg');
+    expect(json.color).to.equal('red');
+  });
+  it('should toJson', async () => {
+    let component = new ChatComponentText('msg');
+    component.style
+      .setColor(ChatColor.GOLD)
+      .setBold(true);
+    let json = toJson(component);
+    expect(json).to.equal('{"color":"gold","bold":true,"text":"msg"}');
+  });
+  it('should fromJson', async () => {
+    let json = '{"text":"hello","color":"red","bold":true}';
+    let component = fromJson(json);
+    expect(component).to.instanceOf(ChatComponentText);
+    expect(component).to.have.property('text').to.equal('hello');
+    expect(component.style.color).to.equal(ChatColor.RED);
+    expect(component.style.bold).to.equal(true);
+  });
+});
+
+describe('test chat raw', function () {
+  it('should toRaw', async () => {
+    let component = new ChatComponentText('HelloWorld');
+    component.style
+      .setColor(ChatColor.RED)
+      .setBold(true);
+    expect(toRaw(component, false)).to.equal('HelloWorld');
+    expect(toRaw(component, true)).to.equal('§c§lHelloWorld');
+  });
+  it('should fromRaw', async () => {
+    let raw = '§6sample &7text';
+    let component = fromRaw(raw);
+    expect(component).to.instanceOf(ChatComponentText);
+    expect(component.extraSize).to.equal(2); // [sample, text]
+    expect(component.extras[0].style.color).to.equal(ChatColor.GOLD);
+    expect(component.extras[1].style.color).to.equal(ChatColor.GRAY);
+  });
+});
+
+describe('test chat fancy', function () {
+  it('should', async () => {
+    let raw = chatFancy('1')
+      .color(ChatColor.GOLD)
+      .then('2')
+      .color(ChatColor.GREEN)
+      .then('3')
+      .color(ChatColor.RED)
+      .build()
+      .toRaw();
+    expect(raw).to.equal('§61§a2§c3');
   });
 });

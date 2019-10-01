@@ -17,7 +17,7 @@ export interface ChatComponent {
 
   toJson: () => string;
 
-  toRaw: (color: boolean) => string;
+  toRaw: (color?: boolean) => string;
 }
 
 export abstract class ChatComponentAbstract implements ChatComponent {
