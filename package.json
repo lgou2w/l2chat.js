@@ -5,7 +5,9 @@
   "module": "dist/l2chat.module.js",
   "main": "dist/l2chat.js",
   "scripts": {
-    "build": "rollup -c",
+    "build:js": "rollup -c",
+    "build:css": "node scripts/build-css",
+    "build": "npm run build:js && npm run build:css",
     "clean": "node scripts/clean",
     "test": "karma start",
     "watch": "rollup -w -c",
@@ -49,6 +51,7 @@
     "rollup-plugin-uglify": "^6.0.3",
     "ts-loader": "^6.0.4",
     "typescript": "^3.6.2",
+    "uglifycss": "^0.0.29",
     "webpack": "^4.39.3"
   },
   "dependencies": {}

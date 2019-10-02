@@ -32,3 +32,8 @@ export {
   ChatComponentFancy,
   chatFancy
 } from './chat-fancy';
+
+export {
+  generateHTML,
+  generateHTMLString
+} from './chat-util';

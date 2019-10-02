@@ -3973,6 +3973,11 @@ uglify-js@^3.4.9:
     commander "~2.20.0"
     source-map "~0.6.1"
 
+uglifycss@^0.0.29:
+  version "0.0.29"
+  resolved "https://registry.npm.taobao.org/uglifycss/download/uglifycss-0.0.29.tgz#abe49531155d146e75dd2fdf933d371bc1180054"
+  integrity sha1-q+SVMRVdFG513S/fkz03G8EYAFQ=
+
 ultron@~1.1.0:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/ultron/download/ultron-1.1.1.tgz#9fe1536a10a664a65266a1e3ccf85fd36302bc9c"
