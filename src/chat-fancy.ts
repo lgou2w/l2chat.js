@@ -1,5 +1,6 @@
 import {
-  Color
+  Color,
+  ChatColor
 } from './chat-color';
 import {
   ChatClickEvent,
@@ -36,8 +37,12 @@ export class ChatComponentFancy {
     return this.then('\n');
   };
 
-  color = (color: Color): ChatComponentFancy => {
-    this.last.style.setColor(color);
+  color = (color: Color | string): ChatComponentFancy => {
+    this.last.style.setColor(
+      typeof color === 'string'
+        ? (ChatColor[color.toUpperCase()] || ChatColor.fromCode(color))
+        : color
+    );
     return this;
   };
 

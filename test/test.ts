@@ -124,4 +124,9 @@ describe('test chat fancy', function () {
       .toRaw();
     expect(raw).to.equal('§61§a2§c3');
   });
+  it('should color string', async () => {
+    expect(chatFancy('').color(ChatColor.RED).build().toRaw()).to.equal('§c');
+    expect(chatFancy('').color('red').build().toRaw()).to.equal('§c');
+    expect(chatFancy('').color('c').build().toRaw()).to.equal('§c');
+  });
 });
