@@ -4,7 +4,7 @@ import { ChatComponent, ChatComponentText } from './chat-component';
 const TAG_TYPE = 'span';
 const CLASS_ROOT = 'l2chat';
 const CLASS_COLOR = (color: Color, shadow?: boolean): string => {
-  let colorName = color.name.replace(/_/g, '-');
+  let colorName = CLASS_ROOT + '-' + color.name.replace(/_/g, '-');
   return !color.isFormat && color !== ChatColor.RESET && shadow === true
     ? colorName + '-shadow'
     : colorName
