@@ -1,5 +1,6 @@
 import { ChatStyle } from './chat-style';
 import { toJson, toRaw } from './chat-serializer';
+import { generateHTML, generateHTMLString } from './chat-util';
 
 export interface ChatComponent {
 
@@ -18,6 +19,10 @@ export interface ChatComponent {
   toJson: () => string;
 
   toRaw: (color?: boolean) => string;
+
+  generateHTML: (shadow?: boolean) => HTMLElement | string;
+
+  generateHTMLString: (shadow?: boolean) => string;
 }
 
 export abstract class ChatComponentAbstract implements ChatComponent {
@@ -65,6 +70,9 @@ export abstract class ChatComponentAbstract implements ChatComponent {
 
   toJson = (): string => { return toJson(this) };
   toRaw = (color: boolean = true): string => { return toRaw(this, color) };
+
+  generateHTML = (shadow?: boolean): HTMLElement | string => { return generateHTML(this, shadow) };
+  generateHTMLString = (shadow?: boolean): string => { return generateHTMLString(this, shadow) };
 }
 
 export class ChatComponentText extends ChatComponentAbstract {
