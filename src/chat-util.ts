@@ -1,6 +1,8 @@
 import { Color, ChatColor } from './chat-color';
 import { ChatComponent, ChatComponentText } from './chat-component';
 
+const REG_WHITESPACE = /\s/g;
+const WHITESPACE = '&nbsp;';
 const TAG_TYPE = 'span';
 const CLASS_ROOT = 'l2chat';
 const CLASS_COLOR = (color: Color, shadow?: boolean): string => {
@@ -41,7 +43,7 @@ const generateHTMLFromBrowser0 = (
   if (style.getObfuscated())
     parent.classList.add(CLASS_COLOR(ChatColor.OBFUSCATED));
   if (component instanceof ChatComponentText)
-    parent.innerText = component.text;
+    parent.innerText = component.text.replace(REG_WHITESPACE, WHITESPACE);
   for (let extra of component.extras)
     parent.appendChild(generateHTMLFromBrowser0(extra, shadow));
   return parent;
@@ -80,7 +82,7 @@ const generateHTMLFromCommon0 = (
     classList.push(CLASS_COLOR(ChatColor.OBFUSCATED));
   html.push(`<span class="${classList.join(' ')}">`);
   if (component instanceof ChatComponentText)
-    html.push(component.text);
+    html.push(component.text.replace(REG_WHITESPACE, WHITESPACE));
   for (let extra of component.extras)
     generateHTMLFromCommon0(html, extra, shadow);
   html.push('</span>');
