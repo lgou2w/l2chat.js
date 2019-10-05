@@ -17,11 +17,9 @@ export interface ChatComponent {
   toString: () => string;
 
   toJson: () => string;
-
   toRaw: (color?: boolean) => string;
 
   generateHTML: (shadow?: boolean) => HTMLElement | string;
-
   generateHTMLString: (shadow?: boolean) => string;
 }
 

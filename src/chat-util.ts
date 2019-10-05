@@ -80,7 +80,10 @@ const generateHTMLFromCommon0 = (
     classList.push(CLASS_COLOR(ChatColor.STRIKETHROUGH));
   if (style.getObfuscated())
     classList.push(CLASS_COLOR(ChatColor.OBFUSCATED));
-  html.push(`<span class="${classList.join(' ')}">`);
+  if (classList.length > 0)
+    html.push(`<span class="${classList.join(' ')}">`);
+  else
+    html.push('<span>');
   if (component instanceof ChatComponentText)
     html.push(component.text.replace(REG_WHITESPACE, WHITESPACE));
   for (let extra of component.extras)

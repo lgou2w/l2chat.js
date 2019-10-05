@@ -138,7 +138,7 @@ export class ChatComponentFancy {
   };
 
   clear = (): ChatComponentFancy => {
-    this.extras = new Array<ChatComponent>();
+    this.extras = [];
     return this;
   };
 
