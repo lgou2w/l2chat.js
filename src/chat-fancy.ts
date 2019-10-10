@@ -111,6 +111,14 @@ export class ChatComponentFancy {
     return this;
   };
 
+  /**
+   * Note: This feature is only available in Minecraft 19w41a and later.
+   */
+  withClickCopyToClipboard = (value: string): ChatComponentFancy => {
+    this.last.style.setClickEvent(ChatClickEvent.Action.COPY_TO_CLIPBOARD.create(value));
+    return this;
+  };
+
   withHoverShowText = (text: string | ChatComponent): ChatComponentFancy => {
     this.last.style.setHoverEvent(ChatHoverEvent.Action.SHOW_TEXT.create(
       typeof text === 'string'

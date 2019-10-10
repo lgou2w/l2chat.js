@@ -32,6 +32,10 @@ export class ChatClickEvent {
     SUGGEST_COMMAND   : defineClickAction('suggest_command'),
     RUN_COMMAND       : defineClickAction('run_command'),
     CHANGE_PAGE       : defineClickAction('change_page'),
+    /**
+     * Note: This feature is only available in Minecraft 19w41a and later.
+     */
+    COPY_TO_CLIPBOARD : defineClickAction('copy_to_clipboard')
   }
 }
 
