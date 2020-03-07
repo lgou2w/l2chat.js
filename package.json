@@ -1,6 +1,6 @@
 {
   "name": "l2chat",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A lgou2w Minecraft Chat library for Javascript",
   "module": "dist/l2chat.module.js",
   "main": "dist/l2chat.js",
