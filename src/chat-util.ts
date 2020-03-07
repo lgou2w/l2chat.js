@@ -73,7 +73,7 @@ const generateHTMLFromBrowser0 = (
     if (style.getBold())
       parent.style.fontWeight = 'bold';
     if (style.getItalic())
-      parent.style.fontSize = 'italic';
+      parent.style.fontStyle = 'italic';
     if (style.getUnderlined())
       parent.style.textDecoration = 'underline';
     if (style.getStrikethrough())
